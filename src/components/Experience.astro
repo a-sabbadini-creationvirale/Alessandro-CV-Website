@@ -1,0 +1,61 @@
+---
+import Icon from './Icon.astro';
+import { type Lang } from '../data/site';
+import { t } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+---
+<section id="experience" class="frame" aria-labelledby="exp-h">
+  <div class="frame-head" data-reveal>
+    <span class="frame-tag"><Icon name="briefcase" size={14} /><b>05</b> / {d.exp.label}</span>
+    <h2 id="exp-h" class="h2" set:html={d.exp.title} />
+    <p class="lead">{d.exp.lead}</p>
+  </div>
+
+  <div class="exp-grid">
+    <div class="roles">
+      {d.exp.roles.map((r) => (
+        <article class="role" data-reveal>
+          <div class="role-h">
+            <h3><span>{r.company}</span></h3>
+            <span class="mono">{r.when} · {r.where}</span>
+          </div>
+          <p class="role-sub">{r.role}</p>
+          <ul>{r.points.map((p) => <li>{p}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+
+    <div class="aside">
+      <div class="box" data-reveal>
+        <h3><Icon name="languages" size={14} />{d.exp.langTitle}</h3>
+        <div class="lang-list">
+          {d.exp.langs.map((l) => (
+            <div class="lang-row">
+              <span>{l.t}</span>
+              <span class="bar" role="img" aria-label={`${l.t}: ${l.l}`}><i style={`--v:${l.v}%`}></i></span>
+              <span class="mono">{l.l}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="box" data-reveal>
+        <h3><Icon name="cap" size={14} />{d.exp.eduTitle}</h3>
+        <ul class="edu">{d.exp.edu.map((e) => <li><b>{e.t}</b><span>{e.s}</span></li>)}</ul>
+      </div>
+      <div class="box" data-reveal>
+        <h3><Icon name="trophy" size={14} />{d.exp.achTitle}</h3>
+        <ul class="ach">{d.exp.ach.map((a) => <li><Icon name="check" size={15} />{a}</li>)}</ul>
+      </div>
+      <div class="box" data-reveal>
+        <h3><Icon name="sparkles" size={14} />{d.exp.skillsTitle}</h3>
+        <div class="chips">{d.exp.skills.map((s) => <span class="chip">{s}</span>)}</div>
+      </div>
+      <div class="box" data-reveal>
+        <h3><Icon name="grid" size={14} />{d.exp.indTitle}</h3>
+        <div class="chips">{d.exp.ind.map((s) => <span class="chip">{s}</span>)}</div>
+      </div>
+    </div>
+  </div>
+</section>

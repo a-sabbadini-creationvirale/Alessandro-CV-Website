@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+import { WORK, CATEGORIES, type Lang } from '../data/site';
+import { t } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const host = (u: string) => new URL(u).hostname.replace(/^www\./, '');
+const count = (c: string) => WORK.filter((p) => p.cat === c).length;
+---
+<section id="work" class="frame" aria-labelledby="work-h">
+  <div class="frame-head" data-reveal>
+    <span class="frame-tag"><Icon name="globe" size={14} /><b>02</b> / {d.work.label} · {WORK.length}</span>
+    <h2 id="work-h" class="h2" set:html={d.work.title} />
+    <p class="lead">{d.work.lead}</p>
+  </div>
+
+  <div class="filters" role="group" aria-label={d.work.label} data-reveal>
+    <button type="button" aria-pressed="true" data-filter="all">{d.work.filters.all}<span>{WORK.length}</span></button>
+    {CATEGORIES.map((c) => (
+      <button type="button" aria-pressed="false" data-filter={c}>{d.work.filters[c]}<span>{count(c)}</span></button>
+    ))}
+  </div>
+
+  <div class="work-grid">
+    {WORK.map((p, i) => (
+      <article class:list={['card', p.featured && 'featured']} data-cat={p.cat} data-reveal style={`--d:${(i % 3) * 0.07}s`}>
+        <div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="url">{host(p.url)}</span></div>
+        {p.featured && <span class="ribbon">{d.work.featured}</span>}
+        <div class="shot">
+          <img
+            src={`/media/work/${p.slug}-sm.webp`}
+            srcset={`/media/work/${p.slug}-sm.webp 640w, /media/work/${p.slug}.webp 1200w`}
+            sizes={i === 0 ? '(max-width: 760px) 92vw, (max-width: 1360px) 88vw, 58vw' : '(max-width: 760px) 92vw, (max-width: 1360px) 44vw, 28vw'}
+            width="1200"
+            height="750"
+            loading="lazy"
+            decoding="async"
+            alt={`${p.name}: homepage`}
+          />
+        </div>
+        <div class="card-body">
+          <div class="card-top"><h3>{p.name}</h3><span class="mono">{p.year}</span></div>
+          <p>{d.work.items[p.slug as keyof typeof d.work.items]}</p>
+          {p.metric && d.work.metrics[p.metric] && <span class="metric">↑ {d.work.metrics[p.metric]}</span>}
+          <div class="tags">{p.stack.map((s) => <span class="tag">{s}</span>)}</div>
+          <a class="visit" href={p.url} target="_blank" rel="noopener">
+            {d.work.visit} <Icon name="arrow-up-right" size={14} /><span class="sr-only"> {p.name} ({d.a11y.newTab})</span>
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

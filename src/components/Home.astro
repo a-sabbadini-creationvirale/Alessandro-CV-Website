@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Shell from './Shell.astro';
+import Hero from './Hero.astro';
+import Work from './Work.astro';
+import Films from './Films.astro';
+import AILab from './AILab.astro';
+import Experience from './Experience.astro';
+import Contact from './Contact.astro';
+import type { Lang } from '../data/site';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<Layout lang={lang}>
+  <Shell lang={lang} />
+  <main id="main">
+    <Hero lang={lang} />
+    <Work lang={lang} />
+    <Films lang={lang} />
+    <AILab lang={lang} />
+    <Experience lang={lang} />
+    <Contact lang={lang} />
+  </main>
+  <script>
+    import '../scripts/site.ts';
+  </script>
+</Layout>

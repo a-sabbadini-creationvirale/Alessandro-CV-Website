@@ -1,0 +1,92 @@
+---
+import Icon from './Icon.astro';
+import { CONTACT, TIMELINE, YEARS, type Lang } from '../data/site';
+import { t } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const rowColors = ['#C9A27E', '#111111', '#7A1F2B', '#B5651D', '#2F6BFF'];
+const initials = (s: string) => s.replace(/^The /, '').split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
+const cells = Array.from({ length: YEARS.length * 4 }, (_, q) => YEARS[0] + Math.floor(q / 4));
+---
+<section id="overview" class="hero" aria-labelledby="hero-title" data-scope>
+  <div class="hero-head" data-build="area" data-order="1" data-layer="Hero / Title">
+    <p class="label" data-build="text" data-order="2" data-layer="Label"><span class="dot"></span>{d.hero.label}</p>
+    <h1 id="hero-title" class="display" data-build="text" data-order="2" data-layer="H1 / Display" set:html={d.hero.title} />
+    <p class="lead" data-build="text" data-order="3" data-layer="Paragraph / Lead">{d.hero.lead}</p>
+    <div class="hero-actions">
+      <form class="brief" data-build="input" data-order="3" data-layer="Input / Brief" data-brief data-email={CONTACT.email} data-subject={d.hero.briefSubject}>
+        <label for="brief" class="sr-only">{d.hero.briefLabel}</label>
+        <Icon name="sparkles" size={18} />
+        <input id="brief" name="brief" type="text" placeholder={d.hero.briefPlaceholder} autocomplete="off" enterkeyhint="send" />
+        <button class="btn btn-accent" type="submit">{d.hero.briefSend}<Icon name="send" size={15} /></button>
+      </form>
+      <a class="btn btn-primary" href="#work" data-build="btn" data-order="4" data-layer="Button / Primary">{d.hero.ctaWork}<Icon name="arrow-right" /></a>
+      <a class="btn btn-ghost" href={CONTACT.cv} download data-build="btn" data-order="4" data-layer="Button / Secondary"><Icon name="download" />{d.hero.ctaCv}</a>
+    </div>
+  </div>
+
+  <figure class="portrait" data-build="media" data-order="2" data-layer="Image / Portrait">
+    <img
+      src="/media/img/alessandro-sm.webp"
+      srcset="/media/img/alessandro-sm.webp 480w, /media/img/alessandro.webp 900w"
+      sizes="(max-width: 760px) 92vw, (max-width: 1100px) 40vw, 28vw"
+      width="900"
+      height="900"
+      alt="Alessandro Sabbadini"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <span class="layer-name" data-bit>alessandro.webp</span>
+    <figcaption data-bit><b>Alessandro Sabbadini</b><span>Barcelona</span></figcaption>
+  </figure>
+
+  <div class="stats">
+    {d.hero.stats.map((s, i) => (
+      <div class="stat" data-build="stat" data-order="5" data-layer={`Stat / 0${i + 1}`}>
+        <b data-count>{s.v}</b>
+        <span data-bit>{s.l}</span>
+      </div>
+    ))}
+  </div>
+
+  <section class="panel builds" data-build="table" data-order="6" data-layer="Table / Recent builds" aria-labelledby="builds-h">
+    <div class="panel-h" data-bit>
+      <h2 id="builds-h"><Icon name="layers" />{d.hero.tableTitle}</h2>
+      <span class="mono">{d.hero.rows.length} × {d.hero.tableCols.length}</span>
+    </div>
+    <table class="tbl">
+      <thead><tr data-bit>{d.hero.tableCols.map((c) => <th scope="col">{c}</th>)}</tr></thead>
+      <tbody>
+        {d.hero.rows.map((r, i) => (
+          <tr data-bit>
+            <td><a href={r.href}><span class="ico" style={`background:${rowColors[i]}`}>{initials(r.name)}</span>{r.name}</a></td>
+            <td>{r.type}</td>
+            <td class="mono">{r.stack}</td>
+            <td class="mono">{r.year}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel timeline" data-build="cal" data-order="6" data-layer="Calendar / Timeline" aria-labelledby="tl-h">
+    <div class="panel-h" data-bit>
+      <h2 id="tl-h"><Icon name="briefcase" />{d.hero.timelineTitle}</h2>
+      <span class="mono">{YEARS[0]} → {YEARS[YEARS.length - 1]}</span>
+    </div>
+    <div class="tl">
+      <div class="tl-years" data-bit aria-hidden="true"><span></span>{YEARS.map((y) => <span>{y}</span>)}</div>
+      {TIMELINE.map((row) => (
+        <div class="tl-row" style={`--c:${row.color}`}>
+          <b data-bit>{d.hero.timeline[row.key as keyof typeof d.hero.timeline]}</b>
+          {cells.map((y) => (
+            <i data-bit class:list={[y >= row.from && y <= row.to && 'on']} aria-hidden="true"></i>
+          ))}
+          <span class="sr-only">{row.from} → {row.to}</span>
+        </div>
+      ))}
+      <div class="tl-now" data-bit><i></i>{d.exp.present}: Eko.com, Barcelona · Mixim Creative Studio</div>
+    </div>
+  </section>
+</section>

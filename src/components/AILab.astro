@@ -1,0 +1,69 @@
+---
+import Icon from './Icon.astro';
+import { AI_TOOLS, type Lang } from '../data/site';
+import { t } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+
+// Illustrative prompt structure (not a client prompt).
+const json = `{
+  "shot": "pdp_lifestyle_03",
+  "product": "@product_ref",
+  "model": "@model_ref",
+  "set": "@set_terrace",
+  "ambient": "{ambient}: warm Mediterranean morning, soft window light",
+  "character": "{character}: same model and styling as @model_ref",
+  "action": "{action}: lifts the bag to eye level, 3/4 view, logo visible",
+  "camera": { "lens": "50mm", "ratio": "4:5", "move": "slow push-in" },
+  "lock": ["product colour", "logo placement", "skin tone"],
+  "models": ["nano-banana-pro", "kling-3.0"],
+  "audit": "claude: compare with @product_ref and flag any drift"
+}`;
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const hl = (line: string) =>
+  line.replace(/"([^"]*)"(\s*:)?/g, (_m, body: string, colon?: string) => {
+    if (colon) return `<span class="k">"${esc(body)}"</span><span class="p">${colon}</span>`;
+    const inner = esc(body)
+      .replace(/@[\w-]+/g, (x) => `<span class="r">${x}</span>`)
+      .replace(/\{\w+\}/g, (x) => `<span class="v">${x}</span>`);
+    return `<span class="s">"${inner}"</span>`;
+  });
+// one block per line so wrapped lines get a hanging indent
+const highlighted = json.split('\n').map((l) => `<span class="ln">${hl(l)}</span>`).join('');
+---
+<section id="ai" class="frame" aria-labelledby="ai-h">
+  <div class="frame-head" data-reveal>
+    <span class="frame-tag"><Icon name="sparkles" size={14} /><b>04</b> / {d.ai.label}</span>
+    <h2 id="ai-h" class="h2" set:html={d.ai.title} />
+    <p class="lead">{d.ai.lead}</p>
+  </div>
+
+  <ol class="pipeline">
+    {d.ai.steps.map((s, i) => (
+      <li class="node" data-reveal style={`--d:${i * 0.06}s`}>
+        <div class="node-card">
+          <span class="mono">{String(i + 1).padStart(2, '0')}</span>
+          <b>{s.t}</b>
+          <p>{s.d}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+
+  <div class="lab-grid">
+    <figure class="code" data-reveal>
+      <div class="code-h"><span class="dots"><i></i><i></i><i></i></span><span>prompt.json · {d.ai.promptTitle}</span><span>{d.ai.promptNote}</span></div>
+      <pre><code set:html={highlighted} /></pre>
+    </figure>
+    <div class="results">
+      {d.ai.results.map((r, i) => (
+        <div class="result" data-reveal style={`--d:${i * 0.06}s`}><b>{r.v}</b><span>{r.l}</span></div>
+      ))}
+      <div class="tools" data-reveal>
+        <h3>{d.ai.toolsTitle}</h3>
+        <div>{AI_TOOLS.map((x) => <span class="chip">{x}</span>)}</div>
+      </div>
+    </div>
+  </div>
+</section>

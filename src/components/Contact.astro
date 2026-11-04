@@ -1,0 +1,36 @@
+---
+import Icon from './Icon.astro';
+import { CONTACT, LANGS, langPath, type Lang } from '../data/site';
+import { t } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const mail = `mailto:${CONTACT.email}?subject=${encodeURIComponent(d.contact.subject)}`;
+const links = [
+  { href: mail, icon: 'mail', label: d.contact.email, value: CONTACT.email },
+  { href: CONTACT.whatsapp, icon: 'chat', label: d.contact.whatsapp, value: '+39 388 934 0521', ext: true },
+  { href: CONTACT.linkedin, icon: 'linkedin', label: d.contact.linkedin, value: 'in/alessandro-sabbadini-lafrance', ext: true },
+  { href: CONTACT.cv, icon: 'download', label: d.contact.cv, value: 'Alessandro_Sabbadini_CV.pdf', download: true },
+];
+---
+<section id="contact" class="frame" aria-labelledby="contact-h">
+  <div class="contact" data-reveal>
+    <span class="frame-tag"><Icon name="mail" size={14} /><b>06</b> / {d.contact.label}</span>
+    <h2 id="contact-h" class="h2" set:html={d.contact.title} />
+    <p class="lead" style="margin-top:18px">{d.contact.lead}</p>
+    <div class="contact-links">
+      {links.map((l) => (
+        <a class="clink" href={l.href} target={l.ext ? '_blank' : undefined} rel={l.ext ? 'noopener' : undefined} download={l.download ? '' : undefined}>
+          <span class="row"><Icon name={l.icon} size={18} /><Icon name={l.download ? 'download' : 'arrow-up-right'} size={16} /></span>
+          <span><b>{l.label}</b><span>{l.value}</span></span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>{d.footer.built}</span>
+  <button class="replay" type="button" data-replay><Icon name="replay" size={14} />{d.footer.replay}</button>
+  <span class="mono">© 2026 Alessandro Sabbadini · {LANGS.map((l, i) => <>{i > 0 && ' · '}<a href={langPath(l)} hreflang={l}>{l.toUpperCase()}</a></>)}</span>
+</footer>

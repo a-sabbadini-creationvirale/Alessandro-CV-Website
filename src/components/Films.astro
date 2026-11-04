@@ -1,0 +1,50 @@
+---
+import Icon from './Icon.astro';
+import { FILMS, type Lang } from '../data/site';
+import { t } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+---
+<section id="films" class="frame" aria-labelledby="films-h">
+  <div class="films-wrap">
+    <div class="frame-head" data-reveal>
+      <span class="frame-tag"><Icon name="film" size={14} /><b>03</b> / {d.films.label} · {FILMS.length}</span>
+      <h2 id="films-h" class="h2" set:html={d.films.title} />
+      <p class="lead">{d.films.lead}</p>
+    </div>
+    <div class="film-grid">
+      {FILMS.map((f, i) => {
+        const it = d.films.items[f.slug];
+        return (
+          <button
+            type="button"
+            class:list={['film', f.wide && 'wide']}
+            data-film={f.slug}
+            data-title={`${f.client} · ${it.title}`}
+            data-desc={it.desc}
+            data-source={f.source ?? ''}
+            data-reveal
+            style={`--d:${(i % 3) * 0.07}s`}
+            aria-label={`${d.a11y.play}: ${f.client}, ${it.title}`}
+          >
+            <img src={`/media/films/${f.slug}.webp`} alt="" width="960" height="540" loading="lazy" decoding="async" />
+            <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-mp4={`/media/films/${f.slug}.mp4`} data-webm={`/media/films/${f.slug}.webm`}></video>
+            <span class="film-kind">{d.films.kinds[f.kind]}</span>
+            <span class="film-play"><Icon name="play" size={15} fill /></span>
+            <span class="film-meta"><span class="mono">{f.client} · {f.year}</span><b>{it.title}</b></span>
+          </button>
+        );
+      })}
+    </div>
+  </div>
+
+  <dialog class="player" id="player" aria-labelledby="player-title">
+    <video controls playsinline preload="none"></video>
+    <div class="player-bar">
+      <div><b id="player-title" data-p-title></b><p data-p-desc></p></div>
+      <a data-p-source href="https://www.universepixelstudio.com/" target="_blank" rel="noopener" hidden>{d.films.source}<Icon name="arrow-up-right" size={13} /></a>
+      <button class="player-close" type="button" data-p-close aria-label={d.a11y.close}><Icon name="x" /></button>
+    </div>
+  </dialog>
+</section>

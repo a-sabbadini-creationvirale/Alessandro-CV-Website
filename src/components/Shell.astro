@@ -1,0 +1,71 @@
+---
+import Icon from './Icon.astro';
+import { LANGS, langPath, WORK, FILMS, type Lang } from '../data/site';
+import { t } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const nav = [
+  { id: 'overview', icon: 'grid', label: d.nav.overview },
+  { id: 'work', icon: 'globe', label: d.nav.work, count: WORK.length },
+  { id: 'films', icon: 'film', label: d.nav.films, count: FILMS.length },
+  { id: 'ai', icon: 'sparkles', label: d.nav.ai },
+  { id: 'experience', icon: 'briefcase', label: d.nav.experience },
+  { id: 'contact', icon: 'mail', label: d.nav.contact },
+];
+---
+<a class="skip" href="#overview">{d.a11y.skip}</a>
+
+<header class="topbar" data-build="bar" data-order="0" data-layer="Topbar">
+  <button class="menu-btn" type="button" aria-label={d.a11y.menu} aria-controls="sidebar" aria-expanded="false" data-menu data-bit>
+    <Icon name="menu" size={18} />
+  </button>
+  <a class="brand-mini" href="#overview" data-bit><span class="mark">AS</span>Alessandro</a>
+  <div class="crumbs" data-bit>
+    <span>alessandro</span><span class="sep">/</span><span>portfolio</span><span class="sep">/</span>
+    <span class="file"><Icon name="layers" size={13} /><b data-crumb>{d.nav.overview}</b></span>
+  </div>
+  <div class="top-right">
+    <span class="avail" data-bit><i></i>{d.top.available}</span>
+    <nav class="langs" aria-label={d.a11y.lang} data-bit>
+      {LANGS.map((l) => (
+        <a href={langPath(l)} hreflang={l} lang={l} aria-current={l === lang ? 'true' : 'false'} data-lang>{l}</a>
+      ))}
+    </nav>
+    <a class="btn btn-primary btn-sm" href="#contact" data-bit>{d.top.contact}</a>
+  </div>
+</header>
+
+<aside class="sidebar" id="sidebar" data-build="side" data-order="0" data-layer="Sidebar">
+  <button class="side-close" type="button" aria-label={d.a11y.close} data-close><Icon name="x" /></button>
+  <div class="side-brand" data-bit>
+    <span class="mark">AS</span>
+    <div><b>alessandrosabbadini</b><span>portfolio · 2026</span></div>
+  </div>
+  <div class="side-profile" data-bit>
+    <img src="/media/img/alessandro-sm.webp" width="42" height="42" alt="" decoding="async" />
+    <div><b>Alessandro Sabbadini</b><span>{d.hero.label}</span></div>
+  </div>
+  <nav class="side-nav" aria-label="Sections">
+    <p class="side-h" data-bit>{d.side.pages}</p>
+    {nav.map((n) => (
+      <a href={`#${n.id}`} data-nav={n.id} data-bit>
+        <Icon name={n.icon} />
+        {n.label}
+        {n.count && <span class="count">{n.count}</span>}
+      </a>
+    ))}
+  </nav>
+  <div class="side-foot">
+    <div class="side-row" data-bit><Icon name="pin" size={15} /><div><small>{d.side.based}</small>{d.side.basedValue}</div></div>
+    <div class="side-row" data-bit><Icon name="id" size={15} /><div><small>{d.side.passports}</small>{d.side.passportsValue}</div></div>
+    <div class="side-row" data-bit>
+      <Icon name="languages" size={15} />
+      <div>
+        <small>{d.side.speaks}</small>
+        <div class="side-langs"><span>IT</span><span>EN</span><span>FR</span><span>ES</span><span>CA</span></div>
+      </div>
+    </div>
+  </div>
+</aside>
+<div class="scrim" data-close></div>
