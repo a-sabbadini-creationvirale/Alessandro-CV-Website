@@ -384,7 +384,7 @@ export function runIntro(force = false) {
     const box = h('div', 'ib-box', boxes);
     box.style.left = `${x}px`;
     box.style.top = `${y}px`;
-    box.innerHTML = '<i class="h tl"></i><i class="h tr"></i><i class="h bl"></i><i class="h br"></i>';
+    box.innerHTML = '<i class="h h-tl"></i><i class="h h-tr"></i><i class="h h-bl"></i><i class="h h-br"></i>';
     const badge = h('span', 'ib-badge', box);
     if (tg.el.dataset.layer && hh > 18) h('span', 'ib-name', box, tg.el.dataset.layer);
     tg.box = box;

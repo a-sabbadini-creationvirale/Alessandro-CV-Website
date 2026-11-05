@@ -438,7 +438,7 @@ html.intro .topbar { background: rgba(242,242,244,1); }
 .ib-box { position: absolute; border: 1px solid var(--accent); background: rgba(47,107,255,.035); transition: opacity .45s var(--ease), background-color .3s; }
 .ib-box.flash { background: rgba(47,107,255,.12); }
 .ib-box .h { position: absolute; width: 7px; height: 7px; background: #fff; border: 1px solid var(--accent); border-radius: 1px; }
-.ib-box .tl { left: -4px; top: -4px; } .ib-box .tr { right: -4px; top: -4px; } .ib-box .bl { left: -4px; bottom: -4px; } .ib-box .br { right: -4px; bottom: -4px; }
+.ib-box .h-tl { left: -4px; top: -4px; } .ib-box .h-tr { right: -4px; top: -4px; } .ib-box .h-bl { left: -4px; bottom: -4px; } .ib-box .h-br { right: -4px; bottom: -4px; }
 .ib-badge { position: absolute; left: 50%; bottom: -9px; transform: translate(-50%, 100%); background: var(--accent); color: #fff; font-size: 10px; line-height: 1; padding: 3px 5px; border-radius: 3px; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .ib-name { position: absolute; left: -1px; top: -5px; transform: translateY(-100%); color: var(--accent); font-size: 10px; white-space: nowrap; }
 .ib-agent { position: absolute; left: 0; top: 0; will-change: transform; transition: opacity .4s; }
