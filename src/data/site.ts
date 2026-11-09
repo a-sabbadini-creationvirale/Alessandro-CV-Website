@@ -50,7 +50,7 @@ export const WORK: Project[] = [
   { slug: 'mixim', name: 'Mixim Creative Studio', url: 'https://miximcreativestudio.com/', year: '2025', cat: 'studio', stack: ['WordPress', 'Motion', 'SEO'] },
 ];
 
-export type FilmKind = 'cgi' | 'motion' | 'brand' | 'edit';
+export type FilmKind = 'cgi' | 'motion' | 'brand' | 'edit' | 'ai';
 export interface Film {
   slug: string;
   client: string;
@@ -58,10 +58,13 @@ export interface Film {
   year: string;
   /** aspect hint for the grid */
   wide?: boolean;
+  /** 9:16 social piece, shown in the vertical row */
+  vertical?: boolean;
   source?: string;
 }
 
 export const FILMS: Film[] = [
+  { slug: 'ai-imperium', client: 'Gen-AI short film', kind: 'ai', year: '2025', wide: true },
   { slug: 'nude-teddy', client: 'Nude Project', kind: 'cgi', year: '2025', wide: true, source: 'https://www.universepixelstudio.com/home-1-1' },
   { slug: 'scalpers', client: 'Scalpers', kind: 'cgi', year: '2025', source: 'https://www.universepixelstudio.com/home-1-1-1' },
   { slug: 'gabizon', client: 'Marco Gabizon', kind: 'brand', year: '2025' },
@@ -71,17 +74,26 @@ export const FILMS: Film[] = [
   { slug: 'laltraroma', client: "L'Altra Roma", kind: 'edit', year: '2025' },
   { slug: 'orangetree', client: 'Orange Tree Homes', kind: 'edit', year: '2025' },
   { slug: 'unica', client: 'Atelier Unica', kind: 'motion', year: '2026' },
-  { slug: 'depetris', client: 'Studio De Petris', kind: 'brand', year: '2026' },
+  { slug: 'depetris', client: 'Studio De Petris', kind: 'brand', year: '2026', wide: true },
+  { slug: 'ai-guardian', client: 'Instagram', kind: 'ai', year: '2026', vertical: true },
+  { slug: 'ai-porsche', client: 'Porsche · spec ad', kind: 'ai', year: '2026', vertical: true },
+  { slug: 'cgi-graceland', client: 'Graceland London', kind: 'cgi', year: '2024', vertical: true },
+  { slug: 'ai-alterego', client: 'Instagram', kind: 'ai', year: '2026', vertical: true },
+  { slug: 'mg-combien', client: 'Motion graphics edit', kind: 'motion', year: '2026', vertical: true },
+  { slug: 'ai-giant', client: 'Instagram', kind: 'ai', year: '2026', vertical: true },
+  { slug: 'cgi-whatif', client: 'Instagram ad', kind: 'cgi', year: '2024', vertical: true },
+  { slug: 'ai-mesh', client: 'Instagram', kind: 'ai', year: '2026', vertical: true },
 ];
 
 export const AI_TOOLS = ['Nano Banana Pro', 'GPT-4', 'Seedance 2.0', 'Grok Imagine', 'Kling 3.0', 'Higgsfield DOP', 'Claude'];
 
 /** Career timeline used in the hero grid. Years are inclusive. */
 export const TIMELINE = [
-  { key: 'mixim', from: 2021, to: 2026, color: '#2F6BFF' },
-  { key: 'fastech', from: 2024, to: 2026, color: '#8B5CF6' },
-  { key: 'ups', from: 2025, to: 2026, color: '#F97316' },
-  { key: 'jam', from: 2025, to: 2026, color: '#EC4899' },
-  { key: 'eko', from: 2026, to: 2026, color: '#10B981' },
+  { key: 'cv', from: 2026 + 7 / 12, to: 2027, color: '#2F6BFF' },
+  { key: 'eko', from: 2026 + 1 / 12, to: 2026 + 7 / 12, color: '#10B981' },
+  { key: 'mixim', from: 2022 + 8 / 12, to: 2026 + 10 / 12, color: '#111827' },
+  { key: 'fastech', from: 2024 + 8 / 12, to: 2026 + 2 / 12, color: '#8B5CF6' },
+  { key: 'ups', from: 2024 + 6 / 12, to: 2025 + 4 / 12, color: '#F97316' },
+  { key: 'jam', from: 2025 + 3 / 12, to: 2025 + 9 / 12, color: '#EC4899' },
 ];
-export const YEARS = [2021, 2022, 2023, 2024, 2025, 2026];
+export const YEARS = [2022, 2023, 2024, 2025, 2026];

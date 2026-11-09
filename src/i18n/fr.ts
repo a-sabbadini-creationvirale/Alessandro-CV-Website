@@ -5,17 +5,17 @@ const fr: Dict = {
   meta: {
     title: 'Alessandro Sabbadini · Contenu Gen-AI, CGI et Web',
     description:
-      'Spécialiste multilingue du contenu Gen-AI et de la création à Barcelone. Fondateur de Mixim Creative Studio : sites web, films de marque, CGI et production IA pour le luxe, l’immobilier et l’hôtellerie.',
+      "Video production manager multilingue et créatif Gen-AI à Québec. Fondateur de Mixim Creative Studio : sites web, films de marque, CGI et vidéo IA pour le luxe, l’immobilier et l’hôtellerie.",
   },
   a11y: { skip: 'Aller au contenu', menu: 'Ouvrir le menu', close: 'Fermer', lang: 'Langue', play: 'Voir le film', newTab: 's’ouvre dans un nouvel onglet' },
   nav: { overview: 'Aperçu', work: 'Sites web', films: 'Films et CGI', ai: 'AI Lab', experience: 'Parcours', contact: 'Contact' },
-  side: { pages: 'Pages', based: 'Basé à', basedValue: 'Barcelone, Espagne', passports: 'Passeports', passportsValue: 'Italien · Canadien', speaks: 'Langues' },
+  side: { pages: 'Pages', based: 'Basé à', basedValue: "Québec, Canada", passports: 'Passeports', passportsValue: 'Italien · Canadien', speaks: 'Langues' },
   top: { available: 'Disponible pour des projets', contact: 'Contact' },
   hero: {
-    label: 'Spécialiste contenu Gen-AI et création',
+    label: 'Production vidéo · CGI · Gen-AI',
     title: 'Je rends les marques <em>irrésistibles</em> avec l’IA, la CGI et le code.',
     lead:
-      'Fondateur de Mixim Creative Studio, je pilote aujourd’hui les opérations de contenu IA pour l’e-commerce d’Eko à Barcelone. Sites, films, CGI et production IA pour des marques du luxe, de l’immobilier et de l’hôtellerie dans cinq pays.',
+      "Video Production Manager chez Création Virale, à Québec, et fondateur de Mixim Creative Studio. Sites, films, CGI et vidéo Gen-AI pour des marques du luxe, de l’immobilier et de l’hôtellerie dans six pays.",
     briefLabel: 'Briefez les agents',
     briefPlaceholder: 'Un site et un film de lancement pour mon hôtel boutique...',
     briefSend: 'Envoyer le brief',
@@ -24,7 +24,7 @@ const fr: Dict = {
     ctaCv: 'Télécharger le CV',
     stats: [
       { v: '40+', l: 'projets livrés' },
-      { v: '5', l: 'marchés : IT ES FR CH US' },
+      { v: '6', l: 'marchés : IT ES FR CH US CA' },
       { v: '4', l: 'langues courantes' },
       { v: '30%+', l: 'de goulots en moins' },
     ],
@@ -35,16 +35,16 @@ const fr: Dict = {
       { name: 'Tacko Ndiaye', type: 'Portfolio d’artiste', stack: 'Next.js · 4 langues', year: '2026', href: '#work' },
       { name: 'Ivy League Club Rome', type: 'Communauté alumni', stack: 'WordPress', year: '2026', href: '#work' },
       { name: 'Nude Project · Teddy', type: 'Film CGI', stack: '3D · Son', year: '2025', href: '#films' },
-      { name: 'Orange Tree Homes', type: 'Site location + film', stack: 'Booking', year: '2025', href: '#work' },
+      { name: 'Imperium', type: 'Court-métrage Gen-AI', stack: 'Vidéo IA', year: '2025', href: '#films' },
     ],
     timelineTitle: 'Parcours',
-    timeline: { mixim: 'Mixim Studio', fastech: 'Fastech', ups: 'Universe Pixel', jam: 'Jam Lab', eko: 'Eko.com' },
+    timeline: { cv: 'Création Virale', eko: 'Eko', mixim: 'Mixim Studio', fastech: 'Fastech', ups: 'Universe Pixel', jam: 'JAM Lab' },
   },
   work: {
     label: 'Sites web',
     title: 'Des sites qui <em>vendent</em> une émotion.',
     lead:
-      'Stratégie, design, développement et contenu, de bout en bout. Les trois premiers sont des projets 2026 codés à la main ; les autres ont été livrés avec mon studio, Mixim, pour des clients en Italie, en Suisse, en France, aux Émirats et aux États-Unis.',
+      "Stratégie, design, développement et contenu, de bout en bout. Les trois premiers sont des projets 2026 codés à la main ; les autres ont été livrés avec mon studio, Mixim, pour des clients en Italie, en Suisse, en France, aux Émirats et aux États-Unis.",
     filters: { all: 'Tous', luxury: 'Luxe et mode', hospitality: 'Hôtellerie', finance: 'Immobilier et finance', culture: 'Art, culture et événements', studio: 'Studios et cabinets' },
     featured: 'Codé à la main · 2026',
     visit: 'Voir le site',
@@ -84,11 +84,22 @@ const fr: Dict = {
   films: {
     label: 'Films et CGI',
     title: 'Des images qui <em>émeuvent</em>.',
-    lead: 'Animation 3D, motion design et films de marque : grooming, rigging, lumière, montage, compositing et sound design.',
-    kinds: { cgi: 'CGI', motion: 'Motion', brand: 'Film de marque', edit: 'Montage' },
+    lead: "Films Gen-AI, animation 3D, motion design et films de marque : grooming, rigging, lumière, montage, compositing et sound design.",
+    kinds: { cgi: 'CGI', motion: 'Motion', brand: 'Film de marque', edit: 'Montage', ai: "Gen-AI" },
     watch: 'Voir',
     source: 'Page du projet',
+    reelsTitle: "Pensé pour les réseaux",
+    reelsLead: "Vidéo Gen-AI, pubs 3D et motion graphics, en vertical pour Instagram.",
     items: {
+      "ai-imperium": { title: "Imperium", desc: "Une épopée romaine racontée entièrement en vidéo Gen-AI : bataille, thermes et banquet dans un même étalonnage." },
+      "ai-porsche": { title: "Hyperdrive", desc: "Pub spec pour une hypercar concept Porsche : intérieur, flammes et vitesse, tout est généré." },
+      "ai-guardian": { title: "Guardian", desc: "Un homme et son chien deviennent un héros en armure et un chien robot. Transformation Gen-AI pour les réseaux." },
+      "ai-alterego": { title: "Mon alter ego IA", desc: "Mon double numérique profite de Rome à l’heure dorée. Le public décide de la suite." },
+      "ai-mesh": { title: "Mesh to Me", desc: "Du wireframe 3D à l’humain numérique photoréaliste, en un seul mouvement." },
+      "ai-giant": { title: "Géante sur la plage", desc: "Flash spécial depuis une ville côtière sous la tempête : une vidéo Gen-AI virale construite comme un direct TV." },
+      "cgi-whatif": { title: "What If You Could?", desc: "Pub 3D pour Instagram : simulation de tissu, globe chromé et formes abstraites. Maya, Houdini et After Effects." },
+      "cgi-graceland": { title: "Spotlight on the Shadows", desc: "Pub 3D pour Graceland London : un rouleau de peinture éclate en personnages. Maya, Houdini et After Effects." },
+      "mg-combien": { title: "Combien de temps ?", desc: "Montage d’interview avec motion graphics : sous-titres cinétiques et schémas animés qui expliquent en direct." },
       'nude-teddy': { title: 'Teddy', desc: 'Personnage CGI hyperréaliste : fourrure brin par brin, rigging, animation, montage et sound design.' },
       scalpers: { title: 'Saint-Valentin', desc: 'Campagne CGI et motion graphics haute couture pour Scalpers.' },
       gabizon: { title: "A Man's World", desc: 'Film de marque pour un atelier de tailleur sur mesure à Rome.' },
@@ -106,7 +117,7 @@ const fr: Dict = {
     label: 'AI Lab',
     title: 'La production Gen-AI, menée comme une <em>opération</em>.',
     lead:
-      'Chez Eko, je produis des images et vidéos IA pour l’e-commerce à l’échelle d’un catalogue. Le savoir-faire, c’est le prompt ; le métier, c’est de le rendre cohérent, mesurable et rapide pour des équipes mondiales.',
+      "Chez Eko, j’ai mené des opérations qualité et contenu assistées par IA pour un catalogue e-commerce mondial. Le savoir-faire, c’est le prompt ; le métier, c’est de le rendre cohérent, mesurable et rapide pour des équipes mondiales.",
     steps: [
       { t: 'Brief', d: 'Produit, marché et cadrage, validés avec les équipes commerciales.' },
       { t: 'Références', d: 'Les entrées @ verrouillent le produit, le modèle et le décor.' },
@@ -131,51 +142,90 @@ const fr: Dict = {
     present: 'Aujourd’hui',
     roles: [
       {
-        company: 'Eko.com',
-        role: 'E-Commerce QA & AI Operations Manager, Espagne',
-        when: '2026 → Aujourd’hui',
-        where: 'Barcelone',
+        company: "Création Virale",
+        role: "Video Production Manager",
+        when: "août 2026 → Aujourd’hui",
+        where: "Québec, Canada",
         points: [
-          'Je produis des images et vidéos IA pour l’e-commerce avec Nano Banana Pro, GPT-4, Seedance 2.0, Grok Imagine, Kling 3.0 et Higgsfield DOP.',
-          'J’utilise les outils de Claude pour rendre les contenus et visuels des fiches produit plus précis et cohérents.',
-          'Des prompts structurés à base de références (notation @ et {}) gardent ambiance, personnage et action cohérents.',
-          'J’ai conçu des systèmes d’audit assistés par IA pour valider les médias, ainsi que les workflows de validation et de livraison.',
-          'J’ai défini les KPI, je pilote le reporting pour des équipes mondiales et j’ai réduit les goulots d’étranglement de plus de 30 %.',
-          'Je supervise les opérations catalogue, en lien direct entre équipes techniques, créatives et commerciales.',
+          "Je pilote la production vidéo de bout en bout : brief, planification, tournage, montage et livraison.",
+          "Je dirige la gestion de production et le développement commercial de l’agence."
         ],
       },
       {
-        company: 'Mixim Creative Studio',
-        role: 'Fondateur',
-        when: '2021 → Aujourd’hui',
-        where: 'À distance',
+        company: "Mixim Creative Studio",
+        role: "Fondateur · Digital Experience & Web/CGI Solutions",
+        when: "sept. 2022 → oct. 2026",
+        where: "Monde · À distance",
         points: [
-          'J’ai fondé et développé l’agence, en gérant tout le cycle client, de la prospection à la signature.',
-          'J’ai dirigé développement web, vidéo, CGI, motion graphics, branding et marketing digital pour le luxe, l’immobilier, l’hôtellerie et les cabinets.',
-          'J’ai bâti les workflows de production et coordonné des équipes de freelances pluridisciplinaires du concept à la livraison.',
-          'J’ai entretenu des relations clients durables en livrant des sites et campagnes premium pour des marques internationales.',
+          "J’ai dirigé la conception et le développement d’expériences digitales à fort impact entre web, CGI et contenus immersifs pour marques et agences.",
+          "J’ai livré des projets complets, du concept et de la direction créative à l’exécution technique et au déploiement.",
+          "J’ai conçu et développé des sites optimisés SEO (Figma, Wix et WordPress) axés sur la performance, l’UX et la conversion.",
+          "J’ai produit CGI, motion graphics et environnements temps réel pour campagnes et événements, avec Unreal Engine, Houdini, Maya et Adobe.",
+          "J’ai travaillé avec des agences et des clients internationaux pour traduire l’identité de marque en assets digitaux performants."
         ],
       },
       {
-        company: 'Fastech Solution',
-        role: 'CGI & Web Development Manager',
-        when: '2024 → 2026',
-        where: 'À distance pour Londres',
-        points: ['J’ai mené les projets clients du brief à la livraison finale.', 'J’ai coordonné prestataires externes et équipes créatives sur plusieurs projets simultanés.'],
+        company: "Eko",
+        role: "E-Commerce QA & AI Operations Manager",
+        when: "févr. 2026 → juil. 2026",
+        where: "Barcelone",
+        points: [
+          "J’ai mené une opération qualité transversale pour un grand projet e-commerce, en soutien direct du catalogue mondial de Best Buy.",
+          "J’ai bâti des frameworks qualité pour fiches, images, vidéos et textes, avec des audits assistés par IA qui bloquent les erreurs avant publication.",
+          "J’ai conçu workflows, protocoles d’escalade et systèmes de communication pour livrer à l’heure sur de gros volumes.",
+          "J’ai fixé des standards qualité et des tableaux de bord KPI qui ont réduit les erreurs et garanti la conformité de chaque asset publié."
+        ],
       },
       {
-        company: 'Universe Pixel Studio',
-        role: 'Monteur vidéo et animateur 3D',
-        when: '2025 → 2026',
-        where: 'Barcelone',
-        points: ['J’ai produit des contenus publicitaires : montage, compositing et sound design.', 'J’ai livré des campagnes pour des marques comme Nude Project et Scalpers.'],
+        company: "Fastech",
+        role: "CGI & Web Development Manager",
+        when: "sept. 2024 → févr. 2026",
+        where: "Rome · Hybride",
+        points: [
+          "J’ai dirigé le département développement web et CGI 3D, de la direction créative à l’exécution technique.",
+          "J’ai managé des équipes transversales sur des sites web, de la production CGI et des expériences immersives.",
+          "J’ai monté des pipelines de production associant temps réel (Unreal Engine) et workflows 3D avancés (Houdini, Maya).",
+          "J’ai fait le lien entre créatifs, techniques et business pour aligner la production sur la stratégie."
+        ],
       },
       {
-        company: 'Jam Marketing Lab',
-        role: 'Junior Social Media Manager et cadreur',
-        when: '2025 → 2026',
-        where: 'Rome',
-        points: ['J’ai soutenu la stratégie et la production de contenus pour des marques B2C.', 'J’ai participé à la gestion des clients dans plusieurs secteurs.'],
+        company: "JAM Marketing Lab",
+        role: "Junior Social Media Manager et cadreur",
+        when: "avr. 2025 → sept. 2025",
+        where: "Rome",
+        points: [
+          "J’ai soutenu la stratégie et la production de contenus pour des marques B2C, derrière la caméra et sur les réseaux."
+        ],
+      },
+      {
+        company: "Universe Pixel Studio",
+        role: "Junior 3D Animator, Video Editor et Sound Designer",
+        when: "juil. 2024 → avr. 2025",
+        where: "Barcelone · Freelance",
+        points: [
+          "J’ai produit des campagnes publicitaires à fort impact comme animateur 3D, monteur, sound designer et artiste VFX 3D.",
+          "Campagnes pour Nude Project, Scalpers et Livo App."
+        ],
+      },
+      {
+        company: "La Salle Campus Barcelona",
+        role: "Assistant d’enseignement, Virtual Production et VFX",
+        when: "sept. 2023 → juin 2024",
+        where: "Barcelone",
+        points: [
+          "Virtual Production avec Unreal Engine 5 (janv.-juin 2024) : retours aux étudiants sur leurs projets UE5.",
+          "VFX avec Houdini FX (sept. 2023-janv. 2024) : retours aux étudiants sur leurs projets Houdini.",
+          "Cours donnés en anglais et en espagnol."
+        ],
+      },
+      {
+        company: "Arty Visuals",
+        role: "Stagiaire VFX Artist et 3D Generalist",
+        when: "juil. 2023 → sept. 2023",
+        where: "Barcelone",
+        points: [
+          "Web design avec WordPress Divi, compositing dans NukeX 14 et effets visuels dans Houdini FX 19.5."
+        ],
       },
     ],
     eduTitle: 'Formation',
@@ -198,8 +248,8 @@ const fr: Dict = {
       'Image et vidéo Gen-AI',
       'Optimisation des workflows par l’IA',
       'Outils IA pour la production',
-      'Animation 3D et VFX',
-      'Développement web',
+      'Unreal Engine 5 · Houdini FX · Maya · NukeX · After Effects',
+      'Web design : Figma, Wix, SEO',
       'Vente B2B',
       'Prospection',
       'Pipelines HubSpot et ClickUp',
@@ -208,7 +258,7 @@ const fr: Dict = {
     achTitle: 'Réalisations clés',
     ach: [
       'Fondé et développé une agence créative indépendante',
-      'Travaillé en Italie, Espagne, France, Suisse et aux États-Unis',
+      "Travaillé en Italie, Espagne, France, Suisse, aux États-Unis et au Canada",
       'Operations manager piloté par les KPI, entre IA et e-commerce',
       'Trouvé et signé moi-même chaque client',
     ],

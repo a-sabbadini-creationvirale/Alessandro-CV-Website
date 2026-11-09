@@ -21,10 +21,11 @@ const jsonLd = {
   image: new URL('/media/img/alessandro.webp', SITE_URL).href,
   jobTitle: d.hero.label,
   email: `mailto:${CONTACT.email}`,
-  address: { '@type': 'PostalAddress', addressLocality: 'Barcelona', addressCountry: 'ES' },
+  address: { '@type': 'PostalAddress', addressLocality: 'Québec City', addressCountry: 'CA' },
   knowsLanguage: ['it', 'en', 'fr', 'es'],
   sameAs: [CONTACT.linkedin, 'https://miximcreativestudio.com/'],
-  worksFor: { '@type': 'Organization', name: 'Mixim Creative Studio', url: 'https://miximcreativestudio.com/' },
+  worksFor: { '@type': 'Organization', name: 'Création Virale' },
+  founder: { '@type': 'Organization', name: 'Mixim Creative Studio', url: 'https://miximcreativestudio.com/' },
 };
 
 const introStrings = JSON.stringify(d.intro);

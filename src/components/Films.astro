@@ -14,28 +14,50 @@ const d = t(lang);
       <p class="lead">{d.films.lead}</p>
     </div>
     <div class="film-grid">
-      {FILMS.map((f, i) => {
-        const it = d.films.items[f.slug];
-        return (
-          <button
-            type="button"
-            class:list={['film', f.wide && 'wide']}
-            data-film={f.slug}
-            data-title={`${f.client} · ${it.title}`}
-            data-desc={it.desc}
-            data-source={f.source ?? ''}
-            data-reveal
-            style={`--d:${(i % 3) * 0.07}s`}
-            aria-label={`${d.a11y.play}: ${f.client}, ${it.title}`}
-          >
-            <img src={`/media/films/${f.slug}.webp`} alt="" width="960" height="540" loading="lazy" decoding="async" />
-            <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-mp4={`/media/films/${f.slug}.mp4`} data-webm={`/media/films/${f.slug}.webm`}></video>
-            <span class="film-kind">{d.films.kinds[f.kind]}</span>
-            <span class="film-play"><Icon name="play" size={15} fill /></span>
-            <span class="film-meta"><span class="mono">{f.client} · {f.year}</span><b>{it.title}</b></span>
-          </button>
-        );
-      })}
+      {FILMS.filter((f) => !f.vertical).map((f, i) => (
+        <button
+          type="button"
+          class:list={['film', f.wide && 'wide', f.vertical && 'vertical']}
+          data-film={f.slug}
+          data-title={`${f.client} · ${d.films.items[f.slug].title}`}
+          data-desc={d.films.items[f.slug].desc}
+          data-source={f.source ?? ''}
+          data-reveal
+          style={`--d:${(i % 4) * 0.06}s`}
+          aria-label={`${d.a11y.play}: ${f.client}, ${d.films.items[f.slug].title}`}
+        >
+          <img src={`/media/films/${f.slug}.webp`} alt="" width={f.vertical ? 432 : 960} height={f.vertical ? 768 : 540} loading="lazy" decoding="async" />
+          <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-mp4={`/media/films/${f.slug}.mp4`} data-webm={`/media/films/${f.slug}.webm`}></video>
+          <span class="film-kind">{d.films.kinds[f.kind]}</span>
+          <span class="film-play"><Icon name="play" size={15} fill /></span>
+          <span class="film-meta"><span class="mono">{f.client} · {f.year}</span><b>{d.films.items[f.slug].title}</b></span>
+        </button>
+      ))}
+    </div>
+    <div class="reels-head" data-reveal>
+      <h3>{d.films.reelsTitle}</h3>
+      <p>{d.films.reelsLead}</p>
+    </div>
+    <div class="reel-grid">
+      {FILMS.filter((f) => f.vertical).map((f, i) => (
+        <button
+          type="button"
+          class:list={['film', f.wide && 'wide', f.vertical && 'vertical']}
+          data-film={f.slug}
+          data-title={`${f.client} · ${d.films.items[f.slug].title}`}
+          data-desc={d.films.items[f.slug].desc}
+          data-source={f.source ?? ''}
+          data-reveal
+          style={`--d:${(i % 4) * 0.06}s`}
+          aria-label={`${d.a11y.play}: ${f.client}, ${d.films.items[f.slug].title}`}
+        >
+          <img src={`/media/films/${f.slug}.webp`} alt="" width={f.vertical ? 432 : 960} height={f.vertical ? 768 : 540} loading="lazy" decoding="async" />
+          <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-mp4={`/media/films/${f.slug}.mp4`} data-webm={`/media/films/${f.slug}.webm`}></video>
+          <span class="film-kind">{d.films.kinds[f.kind]}</span>
+          <span class="film-play"><Icon name="play" size={15} fill /></span>
+          <span class="film-meta"><span class="mono">{f.client} · {f.year}</span><b>{d.films.items[f.slug].title}</b></span>
+        </button>
+      ))}
     </div>
   </div>
 

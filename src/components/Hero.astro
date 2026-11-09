@@ -7,7 +7,7 @@ const { lang } = Astro.props;
 const d = t(lang);
 const rowColors = ['#C9A27E', '#111111', '#7A1F2B', '#B5651D', '#2F6BFF'];
 const initials = (s: string) => s.replace(/^The /, '').split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
-const cells = Array.from({ length: YEARS.length * 4 }, (_, q) => YEARS[0] + Math.floor(q / 4));
+const cells = Array.from({ length: YEARS.length * 4 }, (_, q) => YEARS[0] + q / 4);
 ---
 <section id="overview" class="hero" aria-labelledby="hero-title" data-scope>
   <div class="hero-head" data-build="area" data-order="1" data-layer="Hero / Title">
@@ -38,7 +38,7 @@ const cells = Array.from({ length: YEARS.length * 4 }, (_, q) => YEARS[0] + Math
       decoding="async"
     />
     <span class="layer-name" data-bit>alessandro.webp</span>
-    <figcaption data-bit><b>Alessandro Sabbadini</b><span>Barcelona</span></figcaption>
+    <figcaption data-bit><b>Alessandro Sabbadini</b><span>{d.side.basedValue}</span></figcaption>
   </figure>
 
   <div class="stats">
@@ -81,12 +81,12 @@ const cells = Array.from({ length: YEARS.length * 4 }, (_, q) => YEARS[0] + Math
         <div class="tl-row" style={`--c:${row.color}`}>
           <b data-bit>{d.hero.timeline[row.key as keyof typeof d.hero.timeline]}</b>
           {cells.map((y) => (
-            <i data-bit class:list={[y >= row.from && y <= row.to && 'on']} aria-hidden="true"></i>
+            <i data-bit class:list={[y < row.to && y + 0.25 > row.from && 'on']} aria-hidden="true"></i>
           ))}
-          <span class="sr-only">{row.from} → {row.to}</span>
+          <span class="sr-only">{Math.floor(row.from)} → {Math.floor(row.to - 0.01)}</span>
         </div>
       ))}
-      <div class="tl-now" data-bit><i></i>{d.exp.present}: Eko.com, Barcelona · Mixim Creative Studio</div>
+      <div class="tl-now" data-bit><i></i>{d.exp.present}: Création Virale · {d.side.basedValue}</div>
     </div>
   </section>
 </section>
