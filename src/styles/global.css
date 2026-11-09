@@ -23,7 +23,9 @@
   --night: #0b0b0f;
 
   --sans: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
+  /* small labels: Instrument Sans, the companion of the Instrument Serif accents */
+  --mono: 'Instrument Sans Variable', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+  --code: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --serif: 'Instrument Serif', 'Times New Roman', serif;
 
   --side-w: 248px;
@@ -69,10 +71,10 @@ em { font-style: normal; }
 .display em, .h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; padding-right: 0.04em; }
 .h2 { font-size: clamp(34px, 4.4vw, 60px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.04; text-wrap: balance; }
 .lead { color: var(--ink-2); font-size: clamp(16px, 1.25vw, 18px); line-height: 1.6; max-width: 62ch; text-wrap: pretty; }
-.mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.01em; }
+.mono { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.02em; font-weight: 500; font-variant-numeric: tabular-nums; }
 .label {
   display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3);
+  font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3);
 }
 .label .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 
@@ -354,7 +356,7 @@ dialog.player[open] { animation: pop .45s var(--ease); }
 .code-h .dots { display: flex; gap: 5px; }
 .code-h .dots i { width: 9px; height: 9px; border-radius: 50%; background: #2c2d34; }
 .code-h span:last-child { margin-left: auto; color: #6f6f79; font-size: 11px; }
-.code pre { margin: 0; padding: 18px 18px 20px; font-family: var(--mono); font-size: 13px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+.code pre { margin: 0; padding: 18px 18px 20px; font-family: var(--code); font-size: 13px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
 .code .ln { display: block; padding-left: 6ch; text-indent: -6ch; }
 .code .k { color: #8fb0ff; }
 .code .s { color: #a7e3c4; }
@@ -439,7 +441,7 @@ html.intro .topbar { background: rgba(242,242,244,1); }
 .ib-caret { display: inline-block; width: 2px; height: 0.9em; margin-left: 2px; background: var(--accent); vertical-align: -0.08em; animation: blink .8s steps(2, start) infinite; }
 @keyframes blink { to { visibility: hidden; } }
 
-.ib { position: fixed; inset: 0; z-index: 1000; pointer-events: none; font-family: var(--mono); }
+.ib { position: fixed; inset: 0; z-index: 1000; pointer-events: none; font-family: var(--code); }
 .ib-grid { position: absolute; inset: 0; background-image: radial-gradient(rgba(11,11,15,.13) 1px, transparent 1px); background-size: 20px 20px; transition: opacity .8s var(--ease); }
 .ib-box { position: absolute; border: 1px solid var(--accent); background: rgba(47,107,255,.035); transition: opacity .45s var(--ease), background-color .3s; }
 .ib-box.flash { background: rgba(47,107,255,.12); }
