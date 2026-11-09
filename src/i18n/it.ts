@@ -117,7 +117,7 @@ const it: Dict = {
     label: 'AI Lab',
     title: 'Produzione Gen-AI, gestita come un’<em>operazione</em>.',
     lead:
-      "In Eko ho gestito operazioni di qualità e contenuti assistite da AI per un catalogo e-commerce globale. Il mestiere è il prompt; il lavoro è renderlo coerente, misurabile e veloce per team globali.",
+      "Costruisco sistemi di produzione assistiti dall’AI: prompt strutturati, controlli di qualità automatici e strumenti interni che rendono i contenuti coerenti, misurabili e veloci per interi team.",
     steps: [
       { t: 'Brief', d: 'Prodotto, mercato e inquadratura, concordati con i team commerciali.' },
       { t: 'Riferimenti', d: 'Gli input @ fissano prodotto, modello e set.' },
@@ -134,6 +134,14 @@ const it: Dict = {
       { v: 'PDP', l: 'contenuti e scatti delle pagine prodotto coerenti grazie a Claude' },
     ],
     toolsTitle: 'Stack quotidiano',
+    builtTitle: "Strumenti che ho costruito con Claude",
+    builtLead: "App interne che gestiscono produzione e vendite in Création Virale. I nomi dei clienti sono sfocati.",
+    built: [
+      { t: "Studio script", d: "Pianificare, scrivere e approvare script video brevi per oltre 20 clienti: hook, corpo e CTA, un verdetto per script, in tempo reale per tutto il team." },
+      { t: "Sala di revisione motion", d: "Si crea il brief di un video motion, Claude propone 5 hook e 30 key frame, poi si revisiona fotogramma per fotogramma con commenti e versioni." },
+      { t: "Studio offerte", d: "Sette modelli di proposta brandizzati che il team personalizza ed esporta in PDF, identici al pixel ogni volta." },
+      { t: "Calcolatore preventivi", d: "Si selezionano le esigenze del cliente; prezzi, sconti di impegno e tasse del Québec generano un preventivo o una fattura pronti da inviare." },
+    ],
   },
   exp: {
     label: 'Esperienza',

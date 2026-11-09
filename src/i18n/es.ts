@@ -117,7 +117,7 @@ const es: Dict = {
     label: 'AI Lab',
     title: 'Producción Gen-AI, gestionada como una <em>operación</em>.',
     lead:
-      "En Eko dirigí operaciones de calidad y contenido asistidas por IA para un catálogo de e-commerce global. El oficio es el prompt; el trabajo es hacerlo coherente, medible y rápido para equipos globales.",
+      "Construyo sistemas de producción asistidos por IA: prompts estructurados, controles de calidad automáticos y herramientas internas que hacen el contenido coherente, medible y rápido para equipos enteros.",
     steps: [
       { t: 'Brief', d: 'Producto, mercado y encuadre, acordados con los equipos comerciales.' },
       { t: 'Referencias', d: 'Las entradas @ fijan el producto, el modelo y el set.' },
@@ -134,6 +134,14 @@ const es: Dict = {
       { v: 'PDP', l: 'contenido y fotos de ficha de producto coherentes gracias a Claude' },
     ],
     toolsTitle: 'Stack diario',
+    builtTitle: "Herramientas que he creado con Claude",
+    builtLead: "Apps internas que mueven la producción y las ventas en Création Virale. Los nombres de los clientes están difuminados.",
+    built: [
+      { t: "Estudio de guiones", d: "Planificar, escribir y aprobar guiones de vídeo corto para más de 20 clientes: hook, cuerpo y CTA, un veredicto por guion, en directo para todo el equipo." },
+      { t: "Sala de revisión motion", d: "Se crea el brief de un vídeo motion, Claude propone 5 hooks y 30 fotogramas clave y se revisa fotograma a fotograma con comentarios y versiones." },
+      { t: "Estudio de ofertas", d: "Siete plantillas de propuesta con la marca que el equipo personaliza y exporta a PDF, idénticas al píxel cada vez." },
+      { t: "Calculadora de presupuestos", d: "Se marcan las necesidades del cliente; precios, descuentos por compromiso e impuestos de Quebec generan un presupuesto o factura listos para enviar." },
+    ],
   },
   exp: {
     label: 'Experiencia',

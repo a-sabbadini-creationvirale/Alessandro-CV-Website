@@ -117,7 +117,7 @@ const fr: Dict = {
     label: 'AI Lab',
     title: 'La production Gen-AI, menée comme une <em>opération</em>.',
     lead:
-      "Chez Eko, j’ai mené des opérations qualité et contenu assistées par IA pour un catalogue e-commerce mondial. Le savoir-faire, c’est le prompt ; le métier, c’est de le rendre cohérent, mesurable et rapide pour des équipes mondiales.",
+      "Je construis des systèmes de production assistés par l’IA : prompts structurés, contrôles qualité automatisés et outils internes qui rendent les contenus cohérents, mesurables et rapides pour des équipes entières.",
     steps: [
       { t: 'Brief', d: 'Produit, marché et cadrage, validés avec les équipes commerciales.' },
       { t: 'Références', d: 'Les entrées @ verrouillent le produit, le modèle et le décor.' },
@@ -134,6 +134,14 @@ const fr: Dict = {
       { v: 'PDP', l: 'contenus et visuels des fiches produit rendus cohérents avec Claude' },
     ],
     toolsTitle: 'Stack au quotidien',
+    builtTitle: "Outils que j’ai créés avec Claude",
+    builtLead: "Des applications internes qui font tourner la production et les ventes chez Création Virale. Les noms des clients sont floutés.",
+    built: [
+      { t: "Studio de scripts", d: "Planifier, écrire et approuver des scripts vidéo courts pour plus de 20 clients : hook, corps et CTA, un verdict par script, en direct pour toute l’équipe." },
+      { t: "Salle de revue motion", d: "On rédige le brief d’une vidéo motion, Claude propose 5 hooks et 30 images clés, puis on révise image par image avec commentaires et versions." },
+      { t: "Studio d’offres", d: "Sept modèles de propositions à la marque que l’équipe personnalise et exporte en PDF, identiques au pixel près à chaque fois." },
+      { t: "Calculateur de soumissions", d: "On coche les besoins du client ; prix, rabais d’engagement et taxes du Québec donnent une soumission ou une facture prête à envoyer." },
+    ],
   },
   exp: {
     label: 'Parcours',

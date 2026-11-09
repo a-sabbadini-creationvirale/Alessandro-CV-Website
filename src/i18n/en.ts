@@ -115,7 +115,7 @@ const en = {
     label: 'AI Lab',
     title: 'Gen-AI production, run like <em>operations</em>.',
     lead:
-      "At Eko I ran AI-assisted quality and content operations for a global e-commerce catalogue. The craft is the prompt; the job is making it consistent, measurable and fast for global teams.",
+      "I build AI-assisted production systems: structured prompts, automated quality checks and internal tools that keep content consistent, measurable and fast for whole teams.",
     steps: [
       { t: 'Brief', d: 'Product, market and shot preference, agreed with commercial teams.' },
       { t: 'References', d: '@ inputs lock the product, the model and the set.' },
@@ -132,6 +132,14 @@ const en = {
       { v: 'PDP', l: 'product page content and shots kept consistent with Claude' },
     ],
     toolsTitle: 'Daily stack',
+    builtTitle: "Tools I built with Claude",
+    builtLead: "Internal apps that run production and sales at Création Virale. Client names are blurred.",
+    built: [
+      { t: "Script studio", d: "Plan, write and approve short-form video scripts for 20+ clients: hook, body and CTA, one verdict per script, live for the whole team." },
+      { t: "Motion review room", d: "Brief a motion video, get 5 hooks and 30 key frames from Claude, then review frame by frame with comments and versions." },
+      { t: "Offer studio", d: "Seven branded proposal templates the team customises and exports to PDF, identical to the pixel every time." },
+      { t: "Quote calculator", d: "Tick the client's needs; prices, commitment discounts and Québec taxes build a ready-to-send quote or invoice." },
+    ],
   },
   exp: {
     label: 'Experience',

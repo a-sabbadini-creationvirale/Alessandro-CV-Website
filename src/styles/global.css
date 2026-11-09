@@ -558,3 +558,15 @@ html.intro .topbar { background: rgba(242,242,244,1); }
 }
 
 .side-profile span { font-size: 12px; }
+.built-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin: 48px 0 16px; }
+.built-head h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
+.built-head p { font-size: 14px; color: var(--ink-3); }
+.built-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.built { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform .5s var(--ease), box-shadow .4s; }
+.built:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.built-shot { aspect-ratio: 16 / 11; overflow: hidden; background: #e9e9ee; border-bottom: 1px solid var(--line); }
+.built-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.built figcaption { padding: 16px 18px 18px; display: grid; gap: 6px; }
+.built figcaption b { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; }
+.built figcaption span { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+@media (max-width: 760px) { .built-grid { grid-template-columns: 1fr; } }
