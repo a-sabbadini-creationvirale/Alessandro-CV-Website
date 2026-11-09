@@ -557,16 +557,4 @@ html.intro .topbar { background: rgba(242,242,244,1); }
   html.js [data-reveal] { opacity: 1; transform: none; }
 }
 
-/* ---- Editorial meta type (sidebar + top bar): serif italic + refined small caps ---- */
-.crumbs { font-family: var(--serif); font-style: italic; font-size: 16px; letter-spacing: 0; color: var(--ink-3); gap: 9px; }
-.crumbs b { font-family: var(--sans); font-style: normal; font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; }
-.crumbs .sep { font-style: normal; color: var(--line-2); }
-.side-brand b { font-family: var(--sans); font-size: 14px; letter-spacing: -0.02em; }
-.side-brand div span { font-family: var(--serif); font-style: italic; font-size: 13.5px; letter-spacing: 0; color: #8d8d97; }
-.side-profile span { font-family: var(--serif); font-style: italic; font-size: 13px; line-height: 1.25; color: #b3b3bc; }
-.side-h { font-family: var(--serif); font-style: italic; font-size: 14px; letter-spacing: 0; text-transform: none; color: #7d7d87; margin-bottom: 8px; }
-.side-row small { font-family: var(--serif); font-style: italic; font-size: 13.5px; letter-spacing: 0; text-transform: none; color: #7d7d87; margin-bottom: 1px; }
-.side-row { font-size: 13px; }
-.side-langs span { font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; padding: 3px 7px; }
-.side-nav .count { font-family: var(--serif); font-style: italic; font-size: 14px; color: #7d7d87; }
-.langs a { font-family: var(--sans); font-weight: 600; letter-spacing: 0.06em; font-size: 11px; }
+.side-profile span { font-size: 12px; }
