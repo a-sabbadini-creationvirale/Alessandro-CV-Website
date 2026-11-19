@@ -11,7 +11,6 @@ export const CONTACT = {
   email: 'alessandrosabbadinidesign@gmail.com',
   whatsapp: 'https://wa.me/393889340521',
   linkedin: 'https://www.linkedin.com/in/alessandro-sabbadini-lafrance/',
-  cv: '/Alessandro_Sabbadini_CV.pdf',
 };
 
 export type Category = 'luxury' | 'hospitality' | 'finance' | 'culture' | 'studio';

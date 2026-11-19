@@ -26,15 +26,16 @@ const easeIO = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 const linear = (t: number) => t;
 
+const SPEED = 0.39; // timeline scale: full build in about 3.5s
 let running = false;
 let skipped = false;
 let t0 = 0;
 const restorers: Array<() => void> = [];
 
 function sleep(ms: number) {
-  return new Promise<void>((r) => (skipped ? r() : setTimeout(r, Math.max(0, ms))));
+  return new Promise<void>((r) => (skipped ? r() : setTimeout(r, Math.max(0, ms * SPEED))));
 }
-const until = (ms: number) => sleep(ms - (performance.now() - t0));
+const until = (ms: number) => sleep(ms - (performance.now() - t0) / SPEED);
 
 function tween(dur: number, fn: (e: number) => void, ease = easeIO) {
   return new Promise<void>((res) => {
@@ -42,7 +43,7 @@ function tween(dur: number, fn: (e: number) => void, ease = easeIO) {
     const s = performance.now();
     const step = (now: number) => {
       if (skipped) { fn(1); return res(); }
-      const p = Math.min(1, (now - s) / dur);
+      const p = Math.min(1, (now - s) / (dur * SPEED));
       fn(ease(p));
       p < 1 ? requestAnimationFrame(step) : res();
     };
@@ -252,10 +253,10 @@ export function runIntro(force = false) {
     vis.forEach((b, i) => {
       setTimeout(() => {
         show(b);
-        b.animate([{ opacity: 0, transform: 'translateY(3px) scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(.22,1,.36,1)' });
+        b.animate([{ opacity: 0, transform: 'translateY(3px) scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 320 * SPEED, easing: 'cubic-bezier(.22,1,.36,1)' });
         bump(1 + b.querySelectorAll('*').length);
         if (i % 3 === 0) flashHit(b);
-      }, skipped ? 0 : i * step + rand(0, step * 0.8));
+      }, skipped ? 0 : (i * step + rand(0, step * 0.8)) * SPEED);
     });
     // helpers hop between a few bits and click
     const hops = helpers.map((a, j) => queue(a, async () => {
@@ -297,9 +298,9 @@ export function runIntro(force = false) {
     switch (kind) {
       case 'side': {
         show(el);
-        el.animate([{ transform: 'translateX(-100%)' }, { transform: 'translateX(0)' }], { duration: 640, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' });
+        el.animate([{ transform: 'translateX(-100%)' }, { transform: 'translateX(0)' }], { duration: 640 * SPEED, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' });
         bump(1);
-        setTimeout(fadeBox, 300);
+        setTimeout(fadeBox, 300 * SPEED);
         await sleep(360);
         await burst(el, helpers, 34);
         break;
@@ -308,7 +309,7 @@ export function runIntro(force = false) {
       case 'area': {
         show(el);
         bump(1);
-        setTimeout(fadeBox, 250);
+        setTimeout(fadeBox, 250 * SPEED);
         if (kind === 'bar') await burst(el, helpers, 40);
         break;
       }
@@ -316,42 +317,42 @@ export function runIntro(force = false) {
         const len = (el.textContent || '').length;
         const dur = el.tagName === 'H1' ? clamp(len * 22, 700, 1250) : clamp(len * 5, 320, 1000);
         bump(tg.layers);
-        setTimeout(fadeBox, 200);
+        setTimeout(fadeBox, 200 * SPEED);
         await typeText(el, dur);
         break;
       }
       case 'input': {
         show(el);
-        el.animate([{ opacity: 0, transform: 'scale(.97)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
+        el.animate([{ opacity: 0, transform: 'scale(.97)' }, { opacity: 1, transform: 'none' }], { duration: 420 * SPEED, easing: 'cubic-bezier(.22,1,.36,1)' });
         bump(tg.layers);
-        setTimeout(fadeBox, 220);
+        setTimeout(fadeBox, 220 * SPEED);
         const inp = el.querySelector('input');
         if (inp) await typePlaceholder(inp, 650);
         break;
       }
       case 'btn': {
         show(el);
-        el.animate([{ opacity: 0, transform: 'scale(.9)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
+        el.animate([{ opacity: 0, transform: 'scale(.9)' }, { opacity: 1, transform: 'none' }], { duration: 420 * SPEED, easing: 'cubic-bezier(.22,1,.36,1)' });
         flashHit(el);
         bump(tg.layers);
-        setTimeout(fadeBox, 200);
+        setTimeout(fadeBox, 200 * SPEED);
         break;
       }
       case 'media': {
         show(el);
         const img = el.querySelector('img');
-        img?.animate([{ clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)' }], { duration: 760, easing: 'cubic-bezier(.65,0,.35,1)' });
+        img?.animate([{ clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)' }], { duration: 760 * SPEED, easing: 'cubic-bezier(.65,0,.35,1)' });
         bump(1);
-        setTimeout(fadeBox, 300);
+        setTimeout(fadeBox, 300 * SPEED);
         await sleep(420);
         await burst(el, helpers.slice(0, 1), 90);
         break;
       }
       case 'stat': {
         show(el);
-        el.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
+        el.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 420 * SPEED, easing: 'cubic-bezier(.22,1,.36,1)' });
         bump(2);
-        setTimeout(fadeBox, 220);
+        setTimeout(fadeBox, 220 * SPEED);
         const num = el.querySelector<HTMLElement>('[data-count]');
         const p = num ? countUp(num, 700) : Promise.resolve();
         await burst(el, [], 60);
@@ -361,9 +362,9 @@ export function runIntro(force = false) {
       case 'table':
       case 'cal': {
         show(el);
-        el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
+        el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300 * SPEED });
         bump(1);
-        setTimeout(fadeBox, 260);
+        setTimeout(fadeBox, 260 * SPEED);
         await burst(el, helpers, kind === 'cal' ? 7 : 45);
         break;
       }
@@ -444,7 +445,7 @@ export function runIntro(force = false) {
       await sleep(i * 22);
       await move(a, rand(vw * 0.08, vw * 0.92), rand(vh * 0.1, vh * 0.85), rand(560, 820));
     }));
-    setTimeout(() => { pill.classList.add('on'); skipBtn.classList.add('on'); }, 350);
+    setTimeout(() => { pill.classList.add('on'); skipBtn.classList.add("on"); }, 350 * SPEED);
     await until(700);
 
     // 2. Wireframing (1-3s): layout areas first, then content blocks
@@ -486,7 +487,7 @@ export function runIntro(force = false) {
       show(tg.el);
       tg.el.animate(
         tg.kind === 'side' ? [{ transform: 'translateX(-100%)' }, { transform: 'translateX(0)' }] : [{ opacity: 0 }, { opacity: 1 }],
-        { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' },
+        { duration: 420 * SPEED, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' },
       );
     });
     document.querySelectorAll<HTMLElement>('[data-bit]').forEach(show);
@@ -498,7 +499,7 @@ export function runIntro(force = false) {
       a.chain = Promise.resolve();
       const ex = a.x < vw / 2 ? -40 : vw + 40;
       const ey = a.y + rand(-120, 120);
-      setTimeout(() => { move(a, ex, ey, rand(520, 820)); a.el.style.opacity = '0'; }, i * 14);
+      setTimeout(() => { move(a, ex, ey, rand(520, 820)); a.el.style.opacity = '0'; }, i * 14 * SPEED);
     });
     await sleep(650);
     pill.classList.add('done');
