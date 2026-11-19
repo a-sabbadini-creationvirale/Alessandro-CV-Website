@@ -15,7 +15,7 @@ const cells = Array.from({ length: YEARS.length * 4 }, (_, q) => YEARS[0] + q / 
     <h1 id="hero-title" class="display" data-build="text" data-order="2" data-layer="H1 / Display" set:html={d.hero.title} />
     <p class="lead" data-build="text" data-order="3" data-layer="Paragraph / Lead">{d.hero.lead}</p>
     <div class="hero-actions">
-      <form class="brief" data-build="input" data-order="3" data-layer="Input / Brief" data-brief data-email={CONTACT.email} data-subject={d.hero.briefSubject}>
+      <form class="brief" data-build="input" data-order="3" data-layer="Input / Brief" data-brief data-wa={CONTACT.whatsapp} data-intro={d.hero.briefIntro}>
         <label for="brief" class="sr-only">{d.hero.briefLabel}</label>
         <Icon name="sparkles" size={18} />
         <input id="brief" name="brief" type="text" placeholder={d.hero.briefPlaceholder} autocomplete="off" enterkeyhint="send" />

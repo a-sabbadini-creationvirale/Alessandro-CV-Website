@@ -18,6 +18,7 @@ const en = {
     briefPlaceholder: 'A website and a launch film for my boutique hotel...',
     briefSend: 'Send brief',
     briefSubject: 'New project brief',
+    briefIntro: "Hi Alessandro! I've got a project with your name on it. Here's the brief:",
     ctaWork: 'See the work',
     ctaCv: 'Download CV',
     stats: [

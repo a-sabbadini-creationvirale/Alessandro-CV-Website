@@ -54,8 +54,8 @@ brief?.addEventListener('submit', (e) => {
   e.preventDefault();
   const input = $<HTMLInputElement>('input', brief)!;
   const text = input.value.trim() || input.placeholder.replace(/\.\.\.$/, '');
-  const url = `mailto:${brief.dataset.email}?subject=${encodeURIComponent(brief.dataset.subject || '')}&body=${encodeURIComponent(text)}`;
-  window.location.href = url;
+  const url = `${brief.dataset.wa}?text=${encodeURIComponent(`${brief.dataset.intro}\n\n${text}`)}`;
+  window.open(url, '_blank', 'noopener');
 });
 
 /* Work filters ------------------------------------------------------------- */

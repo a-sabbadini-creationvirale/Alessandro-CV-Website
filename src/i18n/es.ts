@@ -20,6 +20,7 @@ const es: Dict = {
     briefPlaceholder: 'Una web y un film de lanzamiento para mi hotel boutique...',
     briefSend: 'Enviar brief',
     briefSubject: 'Nuevo brief de proyecto',
+    briefIntro: "¡Hola Alessandro! Tengo un proyecto hecho a tu medida. Este es el brief:",
     ctaWork: 'Ver los proyectos',
     ctaCv: 'Descargar el CV',
     stats: [
