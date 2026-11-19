@@ -1,10 +1,12 @@
 ---
 import Icon from './Icon.astro';
 import { WORK, CATEGORIES, type Lang } from '../data/site';
+import { SEO_PAGES, UI, pageUrl } from '../data/seo';
 import { t } from '../i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const d = t(lang);
+const svc = SEO_PAGES.find((p) => p.key === 'web' && p.lang === lang)!;
 const host = (u: string) => new URL(u).hostname.replace(/^www\./, '');
 const count = (c: string) => WORK.filter((p) => p.cat === c).length;
 ---
@@ -13,6 +15,7 @@ const count = (c: string) => WORK.filter((p) => p.cat === c).length;
     <span class="frame-tag"><Icon name="globe" size={14} /><b>02</b> / {d.work.label} · {WORK.length}</span>
     <h2 id="work-h" class="h2" set:html={d.work.title} />
     <p class="lead">{d.work.lead}</p>
+    <a class="work-cta" href={pageUrl(svc)}>{svc.copy.label} · {UI[lang].from}<Icon name="arrow-right" size={15} /></a>
   </div>
 
   <div class="filters" role="group" aria-label={d.work.label} data-reveal>

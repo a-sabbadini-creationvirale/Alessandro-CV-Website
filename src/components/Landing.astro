@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from './Icon.astro';
+import { WORK, CONTACT, SITE_URL, langPath, type Lang } from '../data/site';
+import { UI, SEO_PAGES, PRICE_FROM, pageUrl, alternatesFor, type SeoPage } from '../data/seo';
+import { t } from '../i18n';
+
+interface Props { page: SeoPage }
+const { page } = Astro.props;
+const { lang, copy } = page;
+const u = UI[lang];
+const d = t(lang);
+const url = pageUrl(page);
+const alternates = alternatesFor(page.key);
+const home = langPath(lang);
+const wa = `${CONTACT.whatsapp}?text=${encodeURIComponent(u.waMsg(copy.label))}`;
+const work = page.work.map((s) => WORK.find((w) => w.slug === s)).filter(Boolean) as typeof WORK;
+const host = (x: string) => new URL(x).hostname.replace(/^www\./, '');
+const related = SEO_PAGES.filter((p) => p.lang === lang && p !== page);
+const faq = u.faq;
+const plainH1 = copy.h1.replace(/<[^>]+>/g, '');
+const abs = (p: string) => new URL(p, SITE_URL).href;
+
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: 'Alessandro Sabbadini · Web design',
+    url: abs(url),
+    image: abs('/og.jpg'),
+    priceRange: `€${PRICE_FROM}+`,
+    areaServed: page.city ? { '@type': 'City', name: page.city } : ['Europe', 'Italy', 'Spain', 'France', 'Switzerland', 'United Kingdom'],
+    availableLanguage: ['en', 'it', 'fr', 'es'],
+    founder: { '@type': 'Person', name: 'Alessandro Sabbadini', url: SITE_URL },
+    makesOffer: {
+      '@type': 'Offer',
+      priceCurrency: 'EUR',
+      price: PRICE_FROM,
+      priceSpecification: { '@type': 'PriceSpecification', minPrice: PRICE_FROM, priceCurrency: 'EUR' },
+      itemOffered: { '@type': 'Service', name: copy.label, serviceType: 'Web design and development' },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Alessandro Sabbadini', item: abs(home) },
+      { '@type': 'ListItem', position: 2, name: copy.label, item: abs(url) },
+    ],
+  },
+];
+---
+<Layout lang={lang} title={copy.title} description={copy.description} path={url} alternates={alternates} intro={false} ld={ld}>
+  <header class="lp-top">
+    <a class="lp-back" href={home}><Icon name="arrow-right" size={14} class="flip" />{u.home}</a>
+    <span class="lp-crumb">{copy.label}</span>
+    <div class="top-right">
+      <nav class="langs" aria-label={d.a11y.lang}>
+        {Object.entries(alternates).map(([l, href]) => (
+          <a href={href} hreflang={l} lang={l} aria-current={l === lang ? 'true' : 'false'}>{l}</a>
+        ))}
+      </nav>
+      <a class="btn btn-primary btn-sm" href={wa} target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </header>
+
+  <main class="lp">
+    <section class="lp-hero">
+      <div class="lp-hero-copy">
+        <p class="label"><span class="dot"></span>{copy.label}</p>
+        <h1 class="display" set:html={copy.h1} />
+        <p class="lead">{copy.intro}</p>
+        <div class="hero-actions">
+          <a class="btn btn-accent" href={wa} target="_blank" rel="noopener"><Icon name="chat" />{u.quote}</a>
+          <a class="btn btn-ghost" href={home}>{u.portfolio}<Icon name="arrow-right" /></a>
+        </div>
+      </div>
+      <aside class="lp-price" aria-label={u.from}>
+        <span class="label">{copy.label}</span>
+        <b>{u.from}</b>
+        <p>{u.fixed}</p>
+        <h2>{u.included}</h2>
+        <ul>{u.included_items.map((x) => <li><Icon name="check" size={15} />{x}</li>)}</ul>
+      </aside>
+    </section>
+
+    {copy.local && <p class="lp-local">{copy.local}</p>}
+
+    <section class="lp-block" aria-labelledby="lp-work">
+      <h2 id="lp-work" class="lp-h2">{u.workTitle}</h2>
+      <div class="lp-work">
+        {work.map((p) => (
+          <a class="lp-card" href={p.url} target="_blank" rel="noopener">
+            <img src={`/media/work/${p.slug}-sm.webp`} alt={`${p.name}: homepage`} width="640" height="400" loading="lazy" decoding="async" />
+            <span class="lp-card-body">
+              <b>{p.name}</b>
+              <span>{d.work.items[p.slug as keyof typeof d.work.items]}</span>
+              <em>{host(p.url)} <Icon name="arrow-up-right" size={13} /></em>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="lp-block" aria-labelledby="lp-addons">
+      <h2 id="lp-addons" class="lp-h2">{u.addonsTitle}</h2>
+      <p class="lp-sub">{u.addonsLead}</p>
+      <div class="lp-grid3">
+        {u.addons.map((a, i) => (
+          <div class="lp-tile"><Icon name={['film', 'sparkles', 'layers'][i]} size={18} /><b>{a.t}</b><p>{a.d}</p></div>
+        ))}
+      </div>
+    </section>
+
+    <section class="lp-block" aria-labelledby="lp-process">
+      <h2 id="lp-process" class="lp-h2">{u.processTitle}</h2>
+      <ol class="lp-steps">
+        {u.process.map((s, i) => (
+          <li><span>{String(i + 1).padStart(2, '0')}</span><b>{s.t}</b><p>{s.d}</p></li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="lp-block" aria-labelledby="lp-faq">
+      <h2 id="lp-faq" class="lp-h2">{u.faqTitle}</h2>
+      <div class="lp-faq">
+        {faq.map((f, i) => (
+          <details open={i === 0}><summary>{f.q}</summary><p>{f.a}</p></details>
+        ))}
+      </div>
+    </section>
+
+    {related.length > 0 && (
+      <nav class="lp-block lp-related" aria-label={u.citiesTitle}>
+        <h2 class="lp-h2">{u.citiesTitle}</h2>
+        <div>{related.map((p) => <a class="chip" href={pageUrl(p)}>{p.copy.label}</a>)}</div>
+      </nav>
+    )}
+
+    <section class="lp-cta">
+      <h2 class="h2">{u.ctaTitle}</h2>
+      <p class="lead">{u.ctaLead}</p>
+      <div class="hero-actions">
+        <a class="btn btn-accent" href={wa} target="_blank" rel="noopener"><Icon name="chat" />{u.quote}</a>
+        <a class="btn btn-ghost" href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(plainH1)}`}><Icon name="mail" />{CONTACT.email}</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>© 2026 Alessandro Sabbadini</span>
+    <a class="mono" href={home}>{u.portfolio} →</a>
+  </footer>
+</Layout>

@@ -6,10 +6,25 @@ import '../styles/global.css';
 import { LANGS, SITE_URL, CONTACT, langPath, type Lang } from '../data/site';
 import { t } from '../i18n';
 
-interface Props { lang: Lang }
-const { lang } = Astro.props;
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  /** absolute path of this page, e.g. /it/siti-web/ (defaults to the language home) */
+  path?: string;
+  /** hreflang alternates for this page */
+  alternates?: Partial<Record<Lang, string>>;
+  /** play the AI-agents build intro (home pages only) */
+  intro?: boolean;
+  ld?: object[];
+}
+const { lang, title, description, path, alternates, intro = true, ld = [] } = Astro.props;
 const d = t(lang);
-const canonical = new URL(langPath(lang), SITE_URL).href;
+const pageTitle = title ?? d.meta.title;
+const pageDesc = description ?? d.meta.description;
+const canonical = new URL(path ?? langPath(lang), SITE_URL).href;
+const alts: Partial<Record<Lang, string>> = alternates ?? Object.fromEntries(LANGS.map((l) => [l, langPath(l)]));
+const xDefault = alts.en ?? Object.values(alts)[0] ?? '/';
 const ogImage = new URL('/og.jpg', SITE_URL).href;
 const ogLocale = { en: 'en_US', it: 'it_IT', fr: 'fr_FR', es: 'es_ES' }[lang];
 
@@ -35,11 +50,11 @@ const introStrings = JSON.stringify(d.intro);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>{d.meta.title}</title>
-    <meta name="description" content={d.meta.description} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
     <link rel="canonical" href={canonical} />
-    {LANGS.map((l) => <link rel="alternate" hreflang={l} href={new URL(langPath(l), SITE_URL).href} />)}
-    <link rel="alternate" hreflang="x-default" href={SITE_URL + '/'} />
+    {Object.entries(alts).map(([l, u]) => <link rel="alternate" hreflang={l} href={new URL(u as string, SITE_URL).href} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(xDefault, SITE_URL).href} />
     <meta name="theme-color" content="#F2F2F4" />
     <meta name="color-scheme" content="light" />
 
@@ -47,14 +62,14 @@ const introStrings = JSON.stringify(d.intro);
     <meta property="og:site_name" content="Alessandro Sabbadini" />
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:title" content={d.meta.title} />
-    <meta property="og:description" content={d.meta.description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={d.meta.title} />
-    <meta name="twitter:description" content={d.meta.description} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -64,27 +79,34 @@ const introStrings = JSON.stringify(d.intro);
     <link rel="preload" as="image" imagesrcset="/media/img/alessandro-sm.webp 480w, /media/img/alessandro.webp 900w" imagesizes="(max-width: 760px) 92vw, (max-width: 1100px) 40vw, 28vw" fetchpriority="high" />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {ld.map((x) => <script type="application/ld+json" set:html={JSON.stringify(x)} />)}
 
+    {intro ? (
+      <Fragment>
     <!-- Decide before first paint whether the "AI agents" build intro plays. -->
-    <script is:inline>
-      (function () {
-        var d = document.documentElement;
-        d.classList.add('js');
-        try {
-          var q = location.search;
-          var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          var seen = sessionStorage.getItem('as-built') === '1';
-          var force = q.indexOf('intro') > -1 && q.indexOf('nointro') < 0;
-          if (force || (!rm && !seen && !location.hash && q.indexOf('nointro') < 0)) {
-            d.classList.add('intro');
-            if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-            // Failsafes: never leave the page hidden if the intro script fails.
-            setTimeout(function () { if (!window.__asIntro) d.classList.remove('intro'); }, 3500);
-            setTimeout(function () { d.classList.remove('intro'); }, 16000);
-          }
-        } catch (e) { d.classList.remove('intro'); }
-      })();
-    </script>
+      <script is:inline>
+        (function () {
+          var d = document.documentElement;
+          d.classList.add('js');
+          try {
+            var q = location.search;
+            var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var seen = sessionStorage.getItem('as-built') === '1';
+            var force = q.indexOf('intro') > -1 && q.indexOf('nointro') < 0;
+            if (force || (!rm && !seen && !location.hash && q.indexOf('nointro') < 0)) {
+              d.classList.add('intro');
+              if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+              // Failsafes: never leave the page hidden if the intro script fails.
+              setTimeout(function () { if (!window.__asIntro) d.classList.remove('intro'); }, 3500);
+              setTimeout(function () { d.classList.remove('intro'); }, 16000);
+            }
+          } catch (e) { d.classList.remove('intro'); }
+        })();
+      </script>
+      </Fragment>
+    ) : (
+      <script is:inline>document.documentElement.classList.add('js');</script>
+    )}
   </head>
   <body data-intro={introStrings}>
     <slot />

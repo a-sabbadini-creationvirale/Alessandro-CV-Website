@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { CONTACT, LANGS, langPath, type Lang } from '../data/site';
+import { SEO_PAGES, pageUrl } from '../data/seo';
 import { t } from '../i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -30,6 +31,7 @@ const links = [
 
 <footer class="foot">
   <span>{d.footer.built}</span>
+  <nav class="footer-links" aria-label="Services">{SEO_PAGES.filter((p) => p.lang === lang || (lang !== 'en' && p.lang === 'en' && !SEO_PAGES.some((q) => q.key === p.key && q.lang === lang))).map((p) => <a href={pageUrl(p)}>{p.copy.label}</a>)}</nav>
   <button class="replay" type="button" data-replay><Icon name="replay" size={14} />{d.footer.replay}</button>
   <span class="mono">© 2026 Alessandro Sabbadini · {LANGS.map((l, i) => <>{i > 0 && ' · '}<a href={langPath(l)} hreflang={l}>{l.toUpperCase()}</a></>)}</span>
 </footer>
